@@ -3,25 +3,93 @@
 
 Welkom bij het **Machinemelder.nl** project! Dit project helpt gebruikers om te controleren of de statiegeldmachines in hun buurt werken. We willen de frustratie wegnemen van kapotte machines en samen zorgen voor een soepelere ervaring voor iedereen. 💡
 
+
+## Inhoudsopgave 📖
+
+1. [Introductie](#introductie)
+2. [Benodigde Subscripties en API Sleutels](#benodigde-subscripties-en-api-sleutels-📑)
+   - [MapTiler](#maptiler)
+   - [Stripe (Optioneel)](#stripe-optioneel)
+3. [Setup met Devcontainer in VSCode](#setup-met-devcontainer-in-vscode-🐳)
+   - [Vereisten](#vereisten)
+   - [Snelstart met Docker Compose en Devcontainer](#snelstart-met-docker-compose-en-devcontainer-🛳️)
+4. [Handmatige Setup](#handmatige-setup-🛠️)
+   - [Stap 1: Opzetten van een lokale MariaDB/MySQL database](#stap-1-opzetten-van-een-lokale-mariadbmysql-database-🗄️)
+   - [Stap 3: Importeren van Database en Testdata](#stap-3-importeren-van-database-en-testdata-📂)
+   - [Stap 3: Project starten met Next.js](#stap-3-project-starten-met-nextjs-💻)
+5. [Contributing](#contributing-🤝)
+6. [License](#license-📜)
+
+## Benodigde Subscripties en API Sleutels 📑
+
+### MapTiler
+
+Voor de kaartfunctionaliteit heb je een MapTiler API sleutel nodig:
+
+- **Registreer bij MapTiler**: Ga naar [MapTiler.com](https://www.maptiler.com/) om een account aan te maken.
+- **Genereer je API sleutel**: Voeg de gegenereerde sleutel toe aan uw `.env` bestand:
+  ```bash
+  NEXT_PUBLIC_MAP_TILE_API_KEY=''
+  ```
+
+### Stripe (Optioneel)
+
+Als je de betalingsfunctionaliteit wilt testen, heb je toegang tot Stripe nodig:
+
+- **Registreer bij Stripe**: Ga naar [Stripe.com](https://stripe.com/) om een account aan te maken.
+- **Genereer je API sleutels**: Voeg de gegenereerde sleutels toe aan het `.env` bestand:
+  ```bash
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=''
+  STRIPE_SECRET_KEY=''
+  ```
+
+Stripe biedt testkaarten waarmee je betalingen kunt simuleren tijdens de ontwikkeling. Meer informatie hierover vind je in de [Stripe documentatie](https://stripe.com/docs/testing).
+
+
+## Setup met Devcontainer in VSCode 🐳
+
+### Vereisten
+
+1. [Docker](https://www.docker.com/get-started)
+2. [Visual Studio Code](https://code.visualstudio.com/)
+3. [Devcontainer-extensie voor VSCode](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+### Snelstart met Docker Compose en Devcontainer 🛳️
+
+1. **Open het project in Visual Studio Code**: 
+   - Clone je geforkte repository lokaal.
+
+2. **Open de Command Palette in VSCode**:
+   - Druk `Ctrl + Shift + P` of `Cmd + Shift + P` op Mac.
+   - Typ en selecteer `Dev Containers: Open Folder in Container...`.
+
+3. **Setup met Devcontainer**:
+   - VSCode zal `docker-compose` gebruiken om de Node- en MariaDB-omgeving op te zetten en de database automatisch met testdata te vullen.
+   - De mariadb draait op poort `3036`, en machinemelder.nl standaard op `3000`.
+   - Verder wordt de vscode [sqltools extensie](https://vscode-sqltools.mteixeira.dev/en/drivers.html) geinstalleerd en geconfigureerd voor de aangemaakte database.
+
+4. **Start de ontwikkelserver**:
+   - Binnen de devcontainer: 
+     ```bash
+     npm run dev
+     ```
+   - Open [http://localhost:3000](http://localhost:3000) in je browser.
+
 ---
 
-## Getting Started 🛠️
+## Handmatige Setup 🛠️
 
-### Stap 1: Aanmaken van een MapTiler API Key 🗺️
+*Optional:* Indien je verkiest om de setup handmatig uit te voeren zonder Docker, volg deze stappen:
 
-Om de kaartfunctionaliteit te laten werken, moet je een API key aanmaken op [MapTiler.com](https://www.maptiler.com/). Voeg deze API key toe aan je `.env` bestand onder:
 
-```bash
-NEXT_PUBLIC_MAP_TILE_API_KEY=''
-```
-
-### Stap 2: Opzetten van een lokale MariaDB/MySQL database 🗄️
+### Stap 1: Opzetten van een lokale MariaDB/MySQL database 🗄️
 
 Je hebt een lokale MariaDB of MySQL database nodig om het project te draaien. Volg deze stappen om snel een database op te zetten met **MySQL Workbench**:
 
 1. **Download MySQL Workbench** van [deze link](https://dev.mysql.com/downloads/workbench/) en installeer het.
 2. Maak een nieuwe (local) verbinding en vul de gegevens in het `.env` bestand.
 3. Nadat de verbinding is gemaakt, kun je eenvoudig databases aanmaken en beheren in MySQL Workbench.
+
 
 ### Stap 3: Importeren van Database en Testdata 📂
 
@@ -38,16 +106,8 @@ Volg deze stappen om de database in te stellen:
 
 Nu is je database klaar voor gebruik! 🎉
 
-### Stap 4: Betalingen testen met Stripe 💳
 
-Om betalingen te testen, moet je een account aanmaken op [Stripe.com](https://stripe.com/). Vraag daar je API keys aan en vul ze in je `.env` bestand:
-
-- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-- `STRIPE_SECRET_KEY`
-
-Stripe biedt testkaarten waarmee je betalingen kunt simuleren tijdens de ontwikkeling. Meer informatie hierover vind je in de [Stripe documentatie](https://stripe.com/docs/testing).
-
-### Stap 5: Project starten met Next.js 💻
+### Stap 3: Project starten met Next.js 💻
 
 Om het project lokaal te draaien, volg je deze stappen:
 
@@ -66,6 +126,7 @@ Om het project lokaal te draaien, volg je deze stappen:
 4. Open je browser en ga naar [http://localhost:3000](http://localhost:3000) om de applicatie te bekijken.
 
 Nu kun je lokaal werken aan Machinemelder.nl! 🎉
+
 
 ## Contributing 🤝
 
