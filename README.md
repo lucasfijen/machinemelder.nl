@@ -68,7 +68,20 @@ Stripe biedt testkaarten waarmee je betalingen kunt simuleren tijdens de ontwikk
    - De mariadb draait op poort `3036`, en machinemelder.nl standaard op `3000`.
    - Verder wordt de vscode [sqltools extensie](https://vscode-sqltools.mteixeira.dev/en/drivers.html) geinstalleerd en geconfigureerd voor de aangemaakte database.
 
-4. **Start de ontwikkelserver**:
+4. **Maak een .env bestand aan**:
+    - Creer een `.env` in de hoofdfolder met de volgende inhoud (vergeet de keys niet):
+        ```
+        NEXT_PUBLIC_MAP_TILE_API_KEY='HIERJEKEYVANTILE'
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY='optioneelpublishedkeystripehier'
+        STRIPE_SECRET_KEY='optioneelsecretkeystripehier'
+        MYSQL_HOST=localhost
+        MYSQL_PORT=3306
+        MYSQL_USER=user
+        MYSQL_PASSWORD=password
+        MYSQL_DATABASE=statiegeld_test
+        ```
+        
+5. **Start de ontwikkelserver**:
    - Binnen de devcontainer: 
      ```bash
      npm run dev
